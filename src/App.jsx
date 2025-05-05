@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./Components/navbar/navbar";
 import Home from "./Components/home/Home";
-import Register from "./Components/register/register";
+import Register from "./Components/register/Register";
 import Login from "./Components/login/login";
 import Contacts from "./Components/contacts/contacts";
 import Loader from "./Components/loader/loader";
@@ -15,6 +15,7 @@ import Recommend from "./Components/recommend/Recommend";
 import Footer from "./Components/footer/Footer";
 import AdDetails from "./Components/adDetails/AdDetails";
 import Profile from "./Components/profile/Profile";
+import AddAd from "./Components/addAd/AddAd";
 import "../src/index.css";
 
 const App = () => {
@@ -109,6 +110,18 @@ const App = () => {
             element={
               <div className="page">
                 <Contacts theme={theme} />
+              </div>
+            }
+          />
+          <Route
+            path="/add-ad"
+            element={
+              <div className="page">
+                {isAuthenticated ? (
+                  <AddAd theme={theme} />
+                ) : (
+                  <Navigate to="/login" />
+                )}
               </div>
             }
           />

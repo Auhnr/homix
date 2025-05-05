@@ -12,13 +12,24 @@
   margin: 0 auto;
 }
 
+/* Общий контейнер */
 .register-container {
-  max-width: 600px;
-  padding: 40px;
-  border: 1px solid #ccc;
+  max-width: 400px;
+  margin: 10% auto;
+  padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.register-container.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.register-container.dark {
+  background-color: #2c2c2c;
+  color: #ffffff;
 }
 
 .register-container.text-light {
@@ -41,6 +52,29 @@
   border-color: #246bfd;
 }
 
+/* Заголовок */
+.register-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-title.light {
+  color: #000000;
+}
+
+.register-title.dark {
+  color: #ffffff;
+}
+
+/* Форма */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .register-container h2 {
   text-align: center;
   margin-bottom: 30px;
@@ -54,18 +88,21 @@
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 4px;
   outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease, color 0.3s ease;
+  background-color: inherit;
+  color: inherit;
 }
 
 .form-group input:focus {
@@ -75,20 +112,49 @@
 
 .register-btn {
   width: 100%;
-  padding: 15px;
+  padding: 10px 20px;
   background-color: #246bfd;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 18px;
+  border-radius: 25px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, border 0.3s ease;
+}
+
+.register-btn.light {
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid #ffffff;
+}
+
+.register-btn.light:hover {
+  background-color: #141414;
+}
+
+.register-btn.dark {
+  color: #000000;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+}
+
+.register-btn.dark:hover {
+  background-color: #e0e0e0;
+  border: 3px solid #000000;
 }
 
 .register-btn:hover {
   background-color: #0056b3;
   transform: scale(1.05);
+}
+
+/* Подсказка для входа */
+.login-prompt {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: inherit;
 }
 
 .login-link {
@@ -105,4 +171,56 @@
 
 .login-link a:hover {
   text-decoration: underline;
+}
+
+/* Адаптация для планшетов (ширина до 768px) */
+@media (max-width: 768px) {
+  .register-container {
+    max-width: 90%; /* Увеличиваем ширину контейнера */
+    padding: 16px; /* Уменьшаем внутренние отступы */
+  }
+
+  .register-title {
+    font-size: 24px; /* Уменьшаем размер шрифта заголовка */
+  }
+
+  .form-group input {
+    padding: 8px; /* Уменьшаем внутренние отступы в полях */
+    font-size: 13px; /* Уменьшаем размер текста в полях */
+  }
+
+  .register-btn {
+    padding: 10px; /* Уменьшаем внутренние отступы кнопки */
+    font-size: 14px; /* Уменьшаем размер текста кнопки */
+  }
+
+  .login-prompt {
+    font-size: 13px; /* Уменьшаем размер текста */
+  }
+}
+
+/* Адаптация для телефонов (ширина до 480px) */
+@media (max-width: 480px) {
+  .register-container {
+    max-width: 100%; /* Контейнер занимает всю ширину */
+    padding: 12px; /* Ещё меньше внутренние отступы */
+  }
+
+  .register-title {
+    font-size: 20px; /* Ещё меньше размер шрифта заголовка */
+  }
+
+  .form-group input {
+    padding: 6px; /* Ещё меньше внутренние отступы в полях */
+    font-size: 12px; /* Ещё меньше размер текста в полях */
+  }
+
+  .register-btn {
+    padding: 8px; /* Ещё меньше внутренние отступы кнопки */
+    font-size: 12px; /* Ещё меньше размер текста кнопки */
+  }
+
+  .login-prompt {
+    font-size: 12px; /* Ещё меньше размер текста */
+  }
 }

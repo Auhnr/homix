@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./profile.css";
 
-const EditProfile = ({ user, onSave, onCancel }) => {
+const EditProfile = ({ user, onSave, onCancel, theme }) => {
   const [formData, setFormData] = useState(user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -15,11 +15,11 @@ const EditProfile = ({ user, onSave, onCancel }) => {
   };
 
   return (
-    <div className="edit-profile-container">
-      <h2>Редактировать профиль</h2>
+    <div className={`edit-profile-container ${theme}`}>
+      <h2 className={theme}>Редактировать профиль</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Имя:</label>
+          <label className={theme}>Имя:</label>
           <input
             type="text"
             name="name"
@@ -28,7 +28,7 @@ const EditProfile = ({ user, onSave, onCancel }) => {
           />
         </div>
         <div className="form-group">
-          <label>Email:</label>
+          <label className={theme}>Email:</label>
           <input
             type="email"
             name="email"
@@ -37,7 +37,7 @@ const EditProfile = ({ user, onSave, onCancel }) => {
           />
         </div>
         <div className="form-group">
-          <label>Город:</label>
+          <label className={theme}>Город:</label>
           <input
             type="text"
             name="city"

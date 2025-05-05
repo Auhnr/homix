@@ -1,28 +1,44 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../api/auth";
 import "./login.css";
 
-const Login = ({ theme, setIsAuthenticated }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function LoginPage({ setIsAuthenticated, theme, toggleTheme }) {
+  const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === "admin@example.com" && password === "Admin@12345") {
+
+    if (!form.email || !form.password) {
+      alert("Пожалуйста, заполните все поля");
+      return;
+    }
+
+    try {
+      const res = await login(form);
+      alert(`Добро пожаловать, ${res.data.user.full_name}!`);
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       setIsAuthenticated(true);
-      localStorage.setItem("isAuthenticated", "true");
+
       navigate("/profile");
-    } else {
-      alert("Неверный email или пароль");
+    } catch (err) {
+      console.error("Ошибка входа:", err.response?.data || err.message);
+      alert(err.response?.data?.message || "Ошибка входа");
     }
   };
 
   return (
     <div className={`login-container ${theme}`}>
       <h1 className={`login-title ${theme}`}>Вход</h1>
-      <form className="login-form" onSubmit={handleLogin}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="email" className={`label-${theme}`}>
             Электронная почта
@@ -30,9 +46,10 @@ const Login = ({ theme, setIsAuthenticated }) => {
           <input
             type="email"
             id="email"
+            name="email"
             placeholder="Введите ваш email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            onChange={handleChange}
             required
           />
         </div>
@@ -44,9 +61,10 @@ const Login = ({ theme, setIsAuthenticated }) => {
             <input
               type={showPassword ? "text" : "password"}
               id="password"
+              name="password"
               placeholder="Введите ваш пароль"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={form.password}
+              onChange={handleChange}
               required
             />
             <button
@@ -58,12 +76,18 @@ const Login = ({ theme, setIsAuthenticated }) => {
             </button>
           </div>
         </div>
-        <button type="submit" className="login-btn">
+        <button type="submit" className={`login-btn ${theme}`}>
           Войти
         </button>
+        <p className="register-prompt">
+          Нет аккаунта?{" "}
+          <span className="register-link" onClick={() => navigate("/register")}>
+            Зарегистрироваться
+          </span>
+        </p>
       </form>
     </div>
   );
-};
+}
 
-export default Login;
+export default LoginPage;

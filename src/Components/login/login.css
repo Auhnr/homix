@@ -62,16 +62,30 @@
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
-  color: #ffffff;
-  background-color: #246bfd;
-  border: none;
-  border-radius: 4px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border 0.3s ease;
 }
 
-.login-btn:hover {
-  background-color: #0056b3;
+.login-btn.light {
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid #ffffff;
+}
+
+.login-btn.light:hover {
+  background-color: #141414;
+}
+
+.login-btn.dark {
+  color: #000000;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+}
+
+.login-btn.dark:hover {
+  background-color: #e0e0e0;
+  border: 3px solid #000000;
 }
 
 .password-container {
@@ -98,17 +112,77 @@
   text-decoration: underline;
 }
 
-.register-link {
+.register-prompt {
   text-align: center;
   margin-top: 15px;
+  font-size: 14px;
+  color: inherit;
 }
 
-.register-link a {
+.register-link {
   color: #246bfd;
-  text-decoration: none;
   font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.register-link a:hover {
+.register-link:hover {
+  color: #0056b3;
   text-decoration: underline;
+}
+
+/* Адаптация для планшетов (ширина до 768px) */
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 90%; /* Увеличиваем ширину контейнера */
+    padding: 16px; /* Уменьшаем внутренние отступы */
+  }
+
+
+  .form-group input {
+    padding: 8px; /* Уменьшаем внутренние отступы в полях */
+    font-size: 13px; /* Уменьшаем размер текста в полях */
+  }
+
+  .login-btn {
+    padding: 10px; /* Уменьшаем внутренние отступы кнопки */
+    font-size: 14px; /* Уменьшаем размер текста кнопки */
+  }
+
+  .register-prompt {
+    font-size: 13px; /* Уменьшаем размер текста */
+  }
+}
+
+/* Адаптация для телефонов (ширина до 480px) */
+@media (max-width: 480px) {
+
+
+  .login-title {
+    font-size: 20px; /* Ещё меньше размер шрифта заголовка */
+  }
+
+  .form-group input {
+    padding: 6px; /* Ещё меньше внутренние отступы в полях */
+    font-size: 12px; /* Ещё меньше размер текста в полях */
+  }
+
+  .login-btn {
+    padding: 8px; /* Ещё меньше внутренние отступы кнопки */
+    font-size: 12px; /* Ещё меньше размер текста кнопки */
+  }
+
+  .register-prompt {
+    font-size: 12px; /* Ещё меньше размер текста */
+  }
+
+  .password-container {
+    flex-direction: column; /* Поле и кнопка в столбик */
+    align-items: flex-start; /* Выравнивание по левому краю */
+  }
+
+  .toggle-password {
+    align-self: flex-end; /* Кнопка выравнивается по правому краю */
+    font-size: 12px; /* Уменьшаем размер текста */
+  }
 }
